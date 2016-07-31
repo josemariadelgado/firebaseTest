@@ -4,8 +4,12 @@
 # use_frameworks!
 
 target 'firebaseTest' do
+
 pod 'Firebase'
-pod 'FirebaseDatabase'
+pod 'Firebase/Database'
+pod 'Firebase/Auth'
+pod 'Firebase/Storage'
+
 end
 
 target 'firebaseTestTests' do
