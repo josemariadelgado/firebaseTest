@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1EE075365FCAF41CB3172F30 /* libPods-firebaseTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E7298DBC529C79FEE2957E /* libPods-firebaseTest.a */; };
-		46189A021D4D5EFF00ECB13D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46189A011D4D5EFF00ECB13D /* LoginController.swift */; };
+		46189A021D4D5EFF00ECB13D /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46189A011D4D5EFF00ECB13D /* SignUpController.swift */; };
+		46189A041D4E811F00ECB13D /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46189A031D4E811F00ECB13D /* LoginController.swift */; };
 		46330BD01D4D577B005578A3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46330BCF1D4D577B005578A3 /* GoogleService-Info.plist */; };
 		467756071D4D48C70051E326 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467756061D4D48C70051E326 /* AppDelegate.swift */; };
 		467756091D4D48C70051E326 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467756081D4D48C70051E326 /* ViewController.swift */; };
@@ -38,7 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		46189A011D4D5EFF00ECB13D /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		46189A011D4D5EFF00ECB13D /* SignUpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		46189A031D4E811F00ECB13D /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		46330BCF1D4D577B005578A3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		467756031D4D48C70051E326 /* firebaseTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = firebaseTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		467756061D4D48C70051E326 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,7 +98,9 @@
 		46330BD11D4D57B0005578A3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				46189A011D4D5EFF00ECB13D /* LoginController.swift */,
+				467756081D4D48C70051E326 /* ViewController.swift */,
+				46189A011D4D5EFF00ECB13D /* SignUpController.swift */,
+				46189A031D4E811F00ECB13D /* LoginController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -129,7 +133,6 @@
 			children = (
 				46330BD11D4D57B0005578A3 /* Controller */,
 				467756061D4D48C70051E326 /* AppDelegate.swift */,
-				467756081D4D48C70051E326 /* ViewController.swift */,
 				4677560A1D4D48C70051E326 /* Main.storyboard */,
 				467756101D4D48C70051E326 /* Assets.xcassets */,
 				467756121D4D48C70051E326 /* LaunchScreen.storyboard */,
@@ -351,9 +354,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				467756091D4D48C70051E326 /* ViewController.swift in Sources */,
-				46189A021D4D5EFF00ECB13D /* LoginController.swift in Sources */,
+				46189A021D4D5EFF00ECB13D /* SignUpController.swift in Sources */,
 				467756071D4D48C70051E326 /* AppDelegate.swift in Sources */,
 				4677560F1D4D48C70051E326 /* firebaseTest.xcdatamodeld in Sources */,
+				46189A041D4E811F00ECB13D /* LoginController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,11 +501,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = firebaseTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JoseMariaDelgado.firebaseTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccba8902-ff08-4f35-90b5-1388fc90313a";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -511,11 +518,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = firebaseTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.JoseMariaDelgado.firebaseTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ccba8902-ff08-4f35-90b5-1388fc90313a";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
