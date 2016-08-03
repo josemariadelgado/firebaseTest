@@ -81,8 +81,9 @@ class LoginController: UIViewController {
     }()
     
     func handleRegisterView() {
-        let signUpController = SignUpController()
-        presentViewController(signUpController, animated: true, completion: nil)
+//        let signUpController = SignUpController()
+//        presentViewController(signUpController, animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {

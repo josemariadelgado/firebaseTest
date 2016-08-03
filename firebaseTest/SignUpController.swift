@@ -13,11 +13,18 @@ import FirebaseAuth
 
 class SignUpController: UIViewController {
     
+    let bluecolor: UIColor = UIColor(r:29, g: 104, b: 166)
+    let greenColor: UIColor = UIColor(r:72, g: 203, b: 130)
+    let redColor: UIColor = UIColor(r:203, g: 56, b: 59)
+    let pinkColor: UIColor = UIColor(r:203, g: 73, b: 198)
+    let orangeColor: UIColor = UIColor(r:234, g: 101, b: 16)
+    let grayColor: UIColor = UIColor(r:90, g: 86, b: 82)
+    
     let inputsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.whiteColor()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 4
         view.layer.shadowColor = UIColor.blackColor().CGColor
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSizeZero
@@ -32,7 +39,7 @@ class SignUpController: UIViewController {
         textField.borderStyle = UITextBorderStyle.RoundedRect
         textField.layer.borderColor = UIColor(r: 245, g: 245, b: 245).CGColor
         textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 5
+        textField.layer.cornerRadius = 4
         textField.backgroundColor = UIColor(r: 245, g: 245, b: 245)
         textField.font = UIFont.systemFontOfSize(14)
         textField.autocorrectionType = UITextAutocorrectionType.No
@@ -47,7 +54,7 @@ class SignUpController: UIViewController {
         textField.borderStyle = UITextBorderStyle.RoundedRect
         textField.layer.borderColor = UIColor(r: 245, g: 245, b: 245).CGColor
         textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 5
+        textField.layer.cornerRadius = 4
         textField.backgroundColor = UIColor(r: 245, g: 245, b: 245)
         textField.font = UIFont.systemFontOfSize(14)
         textField.autocorrectionType = UITextAutocorrectionType.No
@@ -64,7 +71,7 @@ class SignUpController: UIViewController {
         textField.layer.borderColor = UIColor(r: 245, g: 245, b: 245).CGColor
         textField.layer.borderColor = UIColor(r: 245, g: 245, b: 245).CGColor
         textField.layer.borderWidth = 1
-        textField.layer.cornerRadius = 5
+        textField.layer.cornerRadius = 4
         textField.backgroundColor = UIColor(r: 245, g: 245, b: 245)
         textField.secureTextEntry = true
         textField.font = UIFont.systemFontOfSize(14)
@@ -73,12 +80,12 @@ class SignUpController: UIViewController {
     
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .System)
-        button.backgroundColor = UIColor(r: 0, g: 200, b: 150)
+        button.backgroundColor = UIColor(r:100, g: 100, b: 100)
         button.setTitle("Sign Up", forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(15)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 3
         
         button.addTarget(self, action: #selector(handleRegister), forControlEvents: .TouchUpInside)
         
@@ -87,7 +94,7 @@ class SignUpController: UIViewController {
     
     lazy var alreadyHaveAnAccountButton: UIButton = {
         let button = UIButton(type: .System)
-        button.setTitle("Already have an account? Sign In", forState: .Normal)
+        button.setTitle("Already have an account? Sign In.", forState: .Normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         button.titleLabel?.font = UIFont.boldSystemFontOfSize(15)
@@ -97,19 +104,149 @@ class SignUpController: UIViewController {
         return button
     }()
     
+    var creatYourAccountLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.boldSystemFontOfSize(15)
+        label.text = "Create Your New Account"
+        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor(r: 75, g: 75, b: 75)
+        return label
+    }()
+    
+    var chooseColorLabel: UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFontOfSize(12)
+        label.text = "Choose your color"
+        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor(r: 255, g: 255, b: 255)
+        return label
+    }()
+    
+    var chooseColorView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var blueColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:29, g: 104, b: 166)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
+    lazy var greenColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:72, g: 203, b: 130)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
+    lazy var redColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:203, g: 56, b: 59)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
+    lazy var pinkColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:203, g: 73, b: 198)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
+    lazy var orangeColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:234, g: 101, b: 16)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
+    lazy var grayColorButton: UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(r:90, g: 86, b: 82)
+        button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
+        
+        button.addTarget(self, action: #selector(chooseColor), forControlEvents: .TouchUpInside)
+        return button
+        
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboard()
         
-        view.backgroundColor = UIColor(r:0, g: 200,b: 150)
+        view.backgroundColor = UIColor(r:100, g: 100, b: 100)
+        
+        if view.backgroundColor == UIColor(r:100, g: 100, b: 100) {
+            inputsContainerView.hidden = true
+            alreadyHaveAnAccountButton.hidden = true
+            inputsContainerView.alpha = 0
+            alreadyHaveAnAccountButton.alpha = 0
+        }
+        
+        loginRegisterButton.enabled = false
+        loginRegisterButton.alpha = 0.3
+        
+        
+        usernameTextField.addTarget(self, action: #selector(usernameTextFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+        emailTextField.addTarget(self, action: #selector(emailTextFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
+        passwordTextField.addTarget(self, action: #selector(passwordTextFieldDidChange), forControlEvents: UIControlEvents.EditingChanged)
         
         view.addSubview(inputsContainerView)
         inputsContainerView.addSubview(emailTextField)
         inputsContainerView.addSubview(passwordTextField)
         inputsContainerView.addSubview(loginRegisterButton)
         inputsContainerView.addSubview(usernameTextField)
+        inputsContainerView.addSubview(creatYourAccountLabel)
         view.addSubview(alreadyHaveAnAccountButton)
+        view.addSubview(chooseColorLabel)
+        view.addSubview(chooseColorView)
+        chooseColorView.addSubview(blueColorButton)
+        chooseColorView.addSubview(greenColorButton)
+        chooseColorView.addSubview(redColorButton)
+        chooseColorView.addSubview(pinkColorButton)
+        chooseColorView.addSubview(orangeColorButton)
+        chooseColorView.addSubview(grayColorButton)
         setupInputsContainer()
         setupAlreadyHaveAnAccountButton()
+        setupChooseColorView()
     }
     
     func handleLoginView() {
@@ -125,6 +262,11 @@ class SignUpController: UIViewController {
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user: FIRUser?, error) in
             if error != nil {
+                if error?.code == 17007 {
+                    self.alertView("Error Signing Up", message: "The email address is already in use by another account." , actionTitle: "Ok")
+                } else {
+                    self.alertView("Error Signing Up", message: "An unknown error has occured :(. Please, try again later." , actionTitle: "Ok")
+                }
                 print(error)
                 return
             }
@@ -142,32 +284,44 @@ class SignUpController: UIViewController {
                     return
                 }
                 
-                let homeViewController = ViewController()
-                self.presentViewController(homeViewController, animated: true, completion: nil)
+                self.dismissViewControllerAnimated(true, completion: nil)
                 print("Saved user successfully into Firebase db")
                 
             })
         })
     }
     
+    func alertView(title: String, message: String, actionTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: actionTitle, style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(action)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
     func setupInputsContainer() {
         inputsContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -25).active = true
+        inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -30).active = true
         inputsContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -74).active = true
-        inputsContainerView.heightAnchor.constraintEqualToConstant(200).active = true
+        inputsContainerView.heightAnchor.constraintEqualToConstant(210).active = true
+        
+        creatYourAccountLabel.centerXAnchor.constraintEqualToAnchor(inputsContainerView.centerXAnchor).active = true
+        creatYourAccountLabel.bottomAnchor.constraintEqualToAnchor(usernameTextField.topAnchor, constant: -15).active = true
+        creatYourAccountLabel.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
+        creatYourAccountLabel.heightAnchor.constraintEqualToConstant(20).active = true
         
         usernameTextField.centerXAnchor.constraintEqualToAnchor(inputsContainerView.centerXAnchor).active = true
-        usernameTextField.centerYAnchor.constraintEqualToAnchor(inputsContainerView.centerYAnchor, constant: -60).active = true
+        usernameTextField.bottomAnchor.constraintEqualToAnchor(emailTextField.topAnchor, constant: -10).active = true
         usernameTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor, constant: -20).active = true
         usernameTextField.heightAnchor.constraintEqualToConstant(30).active = true
         
         emailTextField.centerXAnchor.constraintEqualToAnchor(inputsContainerView.centerXAnchor).active = true
-        emailTextField.centerYAnchor.constraintEqualToAnchor(inputsContainerView.centerYAnchor, constant: -20).active = true
+        emailTextField.bottomAnchor.constraintEqualToAnchor(passwordTextField.topAnchor, constant: -10).active = true
         emailTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor, constant: -20).active = true
         emailTextField.heightAnchor.constraintEqualToConstant(30).active = true
         
         passwordTextField.centerXAnchor.constraintEqualToAnchor(inputsContainerView.centerXAnchor).active = true
-        passwordTextField.centerYAnchor.constraintEqualToAnchor(inputsContainerView.centerYAnchor, constant: 20).active = true
+        passwordTextField.bottomAnchor.constraintEqualToAnchor(loginRegisterButton.topAnchor, constant: -10).active = true
         passwordTextField.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor, constant: -20).active = true
         passwordTextField.heightAnchor.constraintEqualToConstant(30).active = true
         
@@ -183,8 +337,149 @@ class SignUpController: UIViewController {
         alreadyHaveAnAccountButton.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
     }
     
+    func setupChooseColorView() {
+        
+        chooseColorLabel.bottomAnchor.constraintEqualToAnchor(blueColorButton.topAnchor, constant: -15).active = true
+        chooseColorLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        chooseColorLabel.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -74).active = true
+        
+        chooseColorView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        chooseColorView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor, constant: -20).active = true
+        chooseColorView.widthAnchor.constraintEqualToConstant(290).active = true
+        chooseColorView.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        blueColorButton.leftAnchor.constraintEqualToAnchor(chooseColorView.leftAnchor).active = true
+        blueColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        blueColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        blueColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        greenColorButton.leftAnchor.constraintEqualToAnchor(blueColorButton.rightAnchor, constant: 10).active = true
+        greenColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        greenColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        greenColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        redColorButton.leftAnchor.constraintEqualToAnchor(greenColorButton.rightAnchor, constant: 10).active = true
+        redColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        redColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        redColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        pinkColorButton.leftAnchor.constraintEqualToAnchor(redColorButton.rightAnchor, constant: 10).active = true
+        pinkColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        pinkColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        pinkColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        orangeColorButton.leftAnchor.constraintEqualToAnchor(pinkColorButton.rightAnchor, constant: 10).active = true
+        orangeColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        orangeColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        orangeColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
+        grayColorButton.rightAnchor.constraintEqualToAnchor(chooseColorView.rightAnchor).active = true
+        grayColorButton.bottomAnchor.constraintEqualToAnchor(chooseColorView.bottomAnchor).active = true
+        grayColorButton.widthAnchor.constraintEqualToConstant(40).active = true
+        grayColorButton.heightAnchor.constraintEqualToConstant(40).active = true
+    }
+    
+    func chooseColor() {
+        if blueColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.bluecolor
+                self.loginRegisterButton.backgroundColor = self.bluecolor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        } else if greenColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.greenColor
+                self.loginRegisterButton.backgroundColor = self.greenColor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        } else if redColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.redColor
+                self.loginRegisterButton.backgroundColor = self.redColor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        } else if pinkColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.pinkColor
+                self.loginRegisterButton.backgroundColor = self.pinkColor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        } else if orangeColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.orangeColor
+                self.loginRegisterButton.backgroundColor = self.orangeColor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        } else if grayColorButton.touchInside {
+            UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+                self.view.backgroundColor = self.grayColor
+                self.loginRegisterButton.backgroundColor = self.grayColor
+                self.inputsContainerView.hidden = false
+                self.alreadyHaveAnAccountButton.hidden = false
+                self.inputsContainerView.alpha = 1
+                self.alreadyHaveAnAccountButton.alpha = 1
+                }, completion:nil)
+        }
+    }
+    
+    func usernameTextFieldDidChange() {
+        if usernameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == "" || usernameTextField.text?.characters.count < 3 || passwordTextField.text?.characters.count < 6{
+            loginRegisterButton.enabled = false
+            loginRegisterButton.alpha = 0.3
+        } else {
+            loginRegisterButton.enabled = true
+            loginRegisterButton.alpha = 1
+        }
+    }
+    
+    func emailTextFieldDidChange() {
+        if usernameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == "" || usernameTextField.text?.characters.count < 3 || passwordTextField.text?.characters.count < 6{
+            loginRegisterButton.enabled = false
+            loginRegisterButton.alpha = 0.3
+        } else {
+            loginRegisterButton.enabled = true
+            loginRegisterButton.alpha = 1
+        }
+    }
+    
+    func passwordTextFieldDidChange() {
+        if usernameTextField.text == "" || emailTextField.text == "" || passwordTextField.text == "" || usernameTextField.text?.characters.count < 3 || passwordTextField.text?.characters.count < 6 {
+            loginRegisterButton.enabled = false
+            loginRegisterButton.alpha = 0.3
+        } else {
+            loginRegisterButton.enabled = true
+            loginRegisterButton.alpha = 1
+        }
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+}
+
+extension UIViewController {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

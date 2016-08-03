@@ -17,8 +17,17 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .Plain, target: self, action: #selector(handleLogout))
         
-        checkIfUserIsLoggedIn()
-        
+        let launchedBefore = NSUserDefaults.standardUserDefaults().boolForKey("launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+            checkIfUserIsLoggedIn()
+        }
+        else {
+            print("First launch.")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "launchedBefore")
+            let signUpController = SignUpController()
+            presentViewController(signUpController, animated: true, completion: nil)
+        }
     }
     
     func checkIfUserIsLoggedIn() {
@@ -35,7 +44,7 @@ class ViewController: UITableViewController {
             print(logoutError)
         }
         
-        let loginController = LoginController()
+        let loginController = SignUpController()
         presentViewController(loginController, animated: true, completion: nil)
     }
 }
