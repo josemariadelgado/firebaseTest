@@ -12,13 +12,14 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class SignUpController: UIViewController {
-    
-    let bluecolor: UIColor = UIColor(r:29, g: 104, b: 166)
-    let greenColor: UIColor = UIColor(r:72, g: 203, b: 130)
-    let redColor: UIColor = UIColor(r:203, g: 56, b: 59)
-    let pinkColor: UIColor = UIColor(r:203, g: 73, b: 198)
+    let bluecolor: UIColor = UIColor(r:13, g: 144, b: 214)
+    let greenColor: UIColor = UIColor(r:72, g: 214, b: 129)
+    let redColor: UIColor = UIColor(r:214, g: 61, b: 57)
+    let pinkColor: UIColor = UIColor(r:214, g: 91, b: 206)
     let orangeColor: UIColor = UIColor(r:234, g: 101, b: 16)
-    let grayColor: UIColor = UIColor(r:90, g: 86, b: 82)
+    let grayColor: UIColor = UIColor(r:140, g: 140, b: 140)
+    var selectedColor: String! = ""
+    
     
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -134,7 +135,7 @@ class SignUpController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(r:29, g: 104, b: 166)
+        button.backgroundColor = UIColor(r:13, g: 144, b: 214)
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
         
@@ -147,7 +148,7 @@ class SignUpController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(r:72, g: 203, b: 130)
+        button.backgroundColor = UIColor(r:72, g: 214, b: 129)
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
         
@@ -160,7 +161,7 @@ class SignUpController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(r:203, g: 56, b: 59)
+        button.backgroundColor = UIColor(r:214, g: 61, b: 57)
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
         
@@ -173,7 +174,7 @@ class SignUpController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(r:203, g: 73, b: 198)
+        button.backgroundColor = UIColor(r:214, g: 91, b: 206)
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
         
@@ -199,7 +200,7 @@ class SignUpController: UIViewController {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(r:90, g: 86, b: 82)
+        button.backgroundColor = UIColor(r:140, g: 140, b: 140)
         button.layer.borderWidth = 3
         button.layer.borderColor = UIColor(r: 255, g: 255, b: 255).CGColor
         
@@ -255,16 +256,19 @@ class SignUpController: UIViewController {
     }
     
     func handleRegister() {
-        guard let email = emailTextField.text, password = passwordTextField.text else {
+        guard let email = emailTextField.text, password = passwordTextField.text, username = usernameTextField.text else {
             print("Form is not valid")
             return
         }
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password, completion: { (user: FIRUser?, error) in
             if error != nil {
-                if error?.code == 17007 {
+                switch error?.code {
+                case 17007?:
                     self.alertView("Error Signing Up", message: "The email address is already in use by another account." , actionTitle: "Ok")
-                } else {
+                case 17008?:
+                    self.alertView("Error Signing Up", message: "The email address is badly formatted, enter a valid email address (example@email.com)." , actionTitle: "Ok")
+                default:
                     self.alertView("Error Signing Up", message: "An unknown error has occured :(. Please, try again later." , actionTitle: "Ok")
                 }
                 print(error)
@@ -277,7 +281,7 @@ class SignUpController: UIViewController {
             //successfully authenticated user
             let ref = FIRDatabase.database().referenceFromURL("https://test-884bc.firebaseio.com/")
             let usersReference = ref.child("users").child(uid)
-            let values = ["email": email]
+            let values = ["email": email, "username": username, "color": self.selectedColor]
             usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
                 if err != nil {
                     print(err)
@@ -301,7 +305,7 @@ class SignUpController: UIViewController {
     
     func setupInputsContainer() {
         inputsContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -30).active = true
+        inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -40).active = true
         inputsContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -74).active = true
         inputsContainerView.heightAnchor.constraintEqualToConstant(210).active = true
         
@@ -389,6 +393,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#0D90D6"
         } else if greenColorButton.touchInside {
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
                 self.view.backgroundColor = self.greenColor
@@ -398,6 +403,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#48D681"
         } else if redColorButton.touchInside {
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
                 self.view.backgroundColor = self.redColor
@@ -407,6 +413,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#D63D39"
         } else if pinkColorButton.touchInside {
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
                 self.view.backgroundColor = self.pinkColor
@@ -416,6 +423,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#D65BCE"
         } else if orangeColorButton.touchInside {
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
                 self.view.backgroundColor = self.orangeColor
@@ -425,6 +433,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#EA6510"
         } else if grayColorButton.touchInside {
             UIView.animateWithDuration(0.5, delay: 0, options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
                 self.view.backgroundColor = self.grayColor
@@ -434,6 +443,7 @@ class SignUpController: UIViewController {
                 self.inputsContainerView.alpha = 1
                 self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
+            self.selectedColor = "#8C8C8C"
         }
     }
     
