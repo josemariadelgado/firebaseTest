@@ -81,8 +81,8 @@ class LoginController: UIViewController {
     }()
     
     func handleRegisterView() {
-//        let signUpController = SignUpController()
-//        presentViewController(signUpController, animated: true, completion: nil)
+        let signUpController = SignUpController()
+        presentViewController(signUpController, animated: true, completion: nil)
         
     }
     
@@ -108,12 +108,10 @@ class LoginController: UIViewController {
         }
         
         FIRAuth.auth()?.signInWithEmail(email, password: password, completion: { (user, error) in
-            
             if error != nil{
                 print(error)
                 return
             }
-            
             self.dismissViewControllerAnimated(true, completion: nil)
         })
     }
