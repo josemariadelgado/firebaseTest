@@ -118,7 +118,7 @@ class SignUpController: UIViewController {
     var chooseColorLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFontOfSize(12)
+        label.font = UIFont.boldSystemFontOfSize(12)
         label.text = "Choose your color"
         label.textAlignment = NSTextAlignment.Center
         label.textColor = UIColor(r: 255, g: 255, b: 255)
@@ -132,7 +132,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var blueColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:13, g: 144, b: 214)
@@ -145,7 +145,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var greenColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:72, g: 214, b: 129)
@@ -158,7 +158,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var redColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:214, g: 61, b: 57)
@@ -171,7 +171,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var pinkColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:214, g: 91, b: 206)
@@ -184,7 +184,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var orangeColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:234, g: 101, b: 16)
@@ -197,7 +197,7 @@ class SignUpController: UIViewController {
     }()
     
     lazy var grayColorButton: UIButton = {
-        var button = UIButton()
+        var button = UIButton(type: .System)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(r:140, g: 140, b: 140)
@@ -209,17 +209,31 @@ class SignUpController: UIViewController {
         
     }()
     
+    lazy var cancelButton: UIButton = {
+        var button = UIButton(type: .System)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Cancel", forState: .Normal)
+        button.titleLabel?.font = UIFont.boldSystemFontOfSize(15)
+        button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        
+        button.addTarget(self, action: #selector(handleCancel), forControlEvents: .TouchUpInside)
+        
+        return button
+    }()
+    
+    func handleCancel() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboard()
         
-        view.backgroundColor = UIColor(r:100, g: 100, b: 100)
+        view.backgroundColor = UIColor(r:50, g: 50, b: 50)
         
-        if view.backgroundColor == UIColor(r:100, g: 100, b: 100) {
+        if view.backgroundColor == UIColor(r:50, g: 50, b: 50) {
             inputsContainerView.hidden = true
-            alreadyHaveAnAccountButton.hidden = true
             inputsContainerView.alpha = 0
-            alreadyHaveAnAccountButton.alpha = 0
         }
         
         loginRegisterButton.enabled = false
@@ -236,9 +250,10 @@ class SignUpController: UIViewController {
         inputsContainerView.addSubview(loginRegisterButton)
         inputsContainerView.addSubview(usernameTextField)
         inputsContainerView.addSubview(creatYourAccountLabel)
-        view.addSubview(alreadyHaveAnAccountButton)
+//        view.addSubview(alreadyHaveAnAccountButton)
         view.addSubview(chooseColorLabel)
         view.addSubview(chooseColorView)
+        view.addSubview(cancelButton)
         chooseColorView.addSubview(blueColorButton)
         chooseColorView.addSubview(greenColorButton)
         chooseColorView.addSubview(redColorButton)
@@ -246,7 +261,7 @@ class SignUpController: UIViewController {
         chooseColorView.addSubview(orangeColorButton)
         chooseColorView.addSubview(grayColorButton)
         setupInputsContainer()
-        setupAlreadyHaveAnAccountButton()
+//        setupAlreadyHaveAnAccountButton()
         setupChooseColorView()
     }
     
@@ -288,7 +303,8 @@ class SignUpController: UIViewController {
                     return
                 }
                 
-                self.dismissViewControllerAnimated(true, completion: nil)
+                let viewController = ViewController()
+                self.presentViewController(viewController, animated: true, completion: nil)
                 print("Saved user successfully into Firebase db")
                 
             })
@@ -304,6 +320,11 @@ class SignUpController: UIViewController {
     
     
     func setupInputsContainer() {
+        
+        cancelButton.leftAnchor.constraintEqualToAnchor(view.leftAnchor, constant: 10).active = true
+        cancelButton.topAnchor.constraintEqualToAnchor(view.topAnchor, constant: 25).active = true
+        cancelButton.heightAnchor.constraintEqualToConstant(40).active = true
+        
         inputsContainerView.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         inputsContainerView.centerYAnchor.constraintEqualToAnchor(view.centerYAnchor, constant: -40).active = true
         inputsContainerView.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -74).active = true
@@ -336,14 +357,14 @@ class SignUpController: UIViewController {
     }
     
     func setupAlreadyHaveAnAccountButton() {
-        alreadyHaveAnAccountButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        alreadyHaveAnAccountButton.topAnchor.constraintEqualToAnchor(inputsContainerView.bottomAnchor, constant: 10).active = true
-        alreadyHaveAnAccountButton.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
+//        alreadyHaveAnAccountButton.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+//        alreadyHaveAnAccountButton.bottomAnchor.constraintEqualToAnchor(chooseColorLabel.bottomAnchor, constant: -30).active = true
+//        alreadyHaveAnAccountButton.widthAnchor.constraintEqualToAnchor(inputsContainerView.widthAnchor).active = true
     }
     
     func setupChooseColorView() {
         
-        chooseColorLabel.bottomAnchor.constraintEqualToAnchor(blueColorButton.topAnchor, constant: -15).active = true
+        chooseColorLabel.bottomAnchor.constraintEqualToAnchor(blueColorButton.topAnchor, constant: -10).active = true
         chooseColorLabel.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         chooseColorLabel.widthAnchor.constraintEqualToAnchor(view.widthAnchor, constant: -74).active = true
         
@@ -389,9 +410,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.bluecolor
                 self.loginRegisterButton.backgroundColor = self.bluecolor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#0D90D6"
         } else if greenColorButton.touchInside {
@@ -399,9 +418,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.greenColor
                 self.loginRegisterButton.backgroundColor = self.greenColor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#48D681"
         } else if redColorButton.touchInside {
@@ -409,9 +426,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.redColor
                 self.loginRegisterButton.backgroundColor = self.redColor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#D63D39"
         } else if pinkColorButton.touchInside {
@@ -419,9 +434,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.pinkColor
                 self.loginRegisterButton.backgroundColor = self.pinkColor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#D65BCE"
         } else if orangeColorButton.touchInside {
@@ -429,9 +442,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.orangeColor
                 self.loginRegisterButton.backgroundColor = self.orangeColor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#EA6510"
         } else if grayColorButton.touchInside {
@@ -439,9 +450,7 @@ class SignUpController: UIViewController {
                 self.view.backgroundColor = self.grayColor
                 self.loginRegisterButton.backgroundColor = self.grayColor
                 self.inputsContainerView.hidden = false
-                self.alreadyHaveAnAccountButton.hidden = false
                 self.inputsContainerView.alpha = 1
-                self.alreadyHaveAnAccountButton.alpha = 1
                 }, completion:nil)
             self.selectedColor = "#8C8C8C"
         }

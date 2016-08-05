@@ -19,6 +19,7 @@
 		467756141D4D48C70051E326 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 467756121D4D48C70051E326 /* LaunchScreen.storyboard */; };
 		4677561F1D4D48C70051E326 /* firebaseTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4677561E1D4D48C70051E326 /* firebaseTestTests.swift */; };
 		4677562A1D4D48C70051E326 /* firebaseTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467756291D4D48C70051E326 /* firebaseTestUITests.swift */; };
+		4699B6171D54EAE700A73E23 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4699B6161D54EAE700A73E23 /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		467756251D4D48C70051E326 /* firebaseTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = firebaseTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		467756291D4D48C70051E326 /* firebaseTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = firebaseTestUITests.swift; sourceTree = "<group>"; };
 		4677562B1D4D48C70051E326 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4699B6161D54EAE700A73E23 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		85243AC9B9D52C61B30B3562 /* Pods-firebaseTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-firebaseTest/Pods-firebaseTest.release.xcconfig"; sourceTree = "<group>"; };
 		97E7298DBC529C79FEE2957E /* libPods-firebaseTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-firebaseTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD8E371040D337EC7C9B2ED /* Pods-firebaseTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-firebaseTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-firebaseTest/Pods-firebaseTest.debug.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				467756081D4D48C70051E326 /* ViewController.swift */,
 				46189A011D4D5EFF00ECB13D /* SignUpController.swift */,
 				46189A031D4E811F00ECB13D /* LoginController.swift */,
+				4699B6161D54EAE700A73E23 /* WelcomeViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				467756091D4D48C70051E326 /* ViewController.swift in Sources */,
 				46189A021D4D5EFF00ECB13D /* SignUpController.swift in Sources */,
 				467756071D4D48C70051E326 /* AppDelegate.swift in Sources */,
+				4699B6171D54EAE700A73E23 /* WelcomeViewController.swift in Sources */,
 				4677560F1D4D48C70051E326 /* firebaseTest.xcdatamodeld in Sources */,
 				46189A041D4E811F00ECB13D /* LoginController.swift in Sources */,
 			);
